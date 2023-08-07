@@ -168,11 +168,12 @@ open class FSPagerViewTransformer: NSObject {
             let rotation = sin(position*(.pi)*0.5)*(.pi)*0.25*1.5
             let translationZ = -itemSpacing * 0.5 * abs(position)
             var transform3D = CATransform3DIdentity
-            transform3D.m34 = -0.002
-            transform3D = CATransform3DRotate(transform3D, rotation, 0, 1, 0)
-            transform3D = CATransform3DTranslate(transform3D, 0, 0, translationZ)
-            attributes.zIndex = 100 - Int(abs(position))
-            attributes.transform3D = transform3D
+			transform3D.m34 = -0.001
+			transform3D = CATransform3DRotate(transform3D, rotation, 0, 1, 0)
+			print(sin(abs(position)*(.pi)*0.5) * 100)
+			transform3D = CATransform3DTranslate(transform3D, 0, 0, translationZ + cos(abs(position)*(.pi)*0.5) * 50)
+			attributes.zIndex = 100 - Int(abs(position))
+			attributes.transform3D = transform3D
         case .ferrisWheel, .invertedFerrisWheel:
             guard scrollDirection == .horizontal else {
                 // This type doesn't support vertical mode
